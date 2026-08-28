@@ -5,14 +5,19 @@ lack a capability (X has no comment/transcript endpoint) are simply absent
 from that registry.
 """
 
-from . import instagram, tiktok, x, youtube
+from . import instagram, linkedin, threads, tiktok, x, youtube
 
 # Recent posts for a handle: fetch_profile(handle, api_key) -> [post]
+# NOTE: for "linkedin" the handle is a SEARCH QUERY, not a person — that endpoint
+# is keyword-only (see linkedin.py). X returns popular-not-recent tweets, so it is
+# kept only as low-signal "greatest-hits"; threads/linkedin are the recency sources.
 PROFILE_FETCHERS = {
     "instagram": instagram.fetch_profile,
     "x": x.fetch_profile,
     "tiktok": tiktok.fetch_profile,
     "youtube": youtube.fetch_profile,
+    "threads": threads.fetch_profile,
+    "linkedin": linkedin.fetch_profile,
 }
 
 # A single post by URL: fetch_post(url, api_key) -> post | None

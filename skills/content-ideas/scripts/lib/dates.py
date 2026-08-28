@@ -18,6 +18,23 @@ def timestamp_to_date(ts):
         return None
 
 
+def parse_iso_date(s):
+    """Parse an ISO-8601 datetime (e.g. '2026-08-25T12:48:46.547Z') to YYYY-MM-DD, or None.
+
+    Used by fetchers whose API returns ISO timestamps (LinkedIn). Falls back to the
+    leading YYYY-MM-DD if the full parse fails but the string clearly starts with one.
+    """
+    if not s:
+        return None
+    try:
+        return datetime.fromisoformat(str(s).replace("Z", "+00:00")).strftime("%Y-%m-%d")
+    except (ValueError, TypeError):
+        s = str(s)
+        if len(s) >= 10 and s[4] == "-" and s[7] == "-":
+            return s[:10]
+        return None
+
+
 def parse_x_date(created_at):
     """Parse an X/Twitter `created_at` string to YYYY-MM-DD, or None.
 
