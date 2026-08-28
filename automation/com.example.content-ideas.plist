@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.example.content-ideas</string>
+
+  <!-- EDIT: absolute path to content-ideas-cron.sh -->
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>/ABSOLUTE/PATH/TO/automation/content-ideas-cron.sh</string>
+  </array>
+
+  <!-- Fires daily at 07:00 local time; the script's CADENCE_DAYS gate decides whether to actually run -->
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Hour</key><integer>7</integer>
+    <key>Minute</key><integer>0</integer>
+  </dict>
+
+  <key>RunAtLoad</key><false/>
+
+  <!-- EDIT: your username -->
+  <key>StandardOutPath</key><string>/Users/YOU/Library/Logs/content-ideas-launchd.log</string>
+  <key>StandardErrorPath</key><string>/Users/YOU/Library/Logs/content-ideas-launchd.err</string>
+</dict>
+</plist>
